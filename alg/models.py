@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 from django.db import models
-from arif import postfixEval, Stack, infixToPostfix
+from .arif import postfixEval, Stack, infixToPostfix
 
 # Create your models here.
 class Solution(models.Model):
