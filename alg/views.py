@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render, redirect
 from .models import Solution
-from .forms import PostForm
+from .forms import PostForm, AddForm
 
 # Create your views here.
 
@@ -12,20 +12,29 @@ def process(request):
     task_ = Solution.objects.all()[i].task
     if request.POST:
         form = PostForm(request.POST)
-        got = form.save(commit=False)
-        got.task = task_
-        got.resh()
-        if got.sol == got.answer:
-            ans = 'Молодец!'
-            i += 1
-            if i > (len(Solution.objects.all()) - 1):
-                i = 0
-                return redirect('process')
-            task_ = Solution.objects.all()[i].task
-        else:
-            ans = 'Фу-у-у-у!'
+        if form.is_valid():
+            got = form.save(commit=False)
+            got.task = task_
+            got.resh()
+            if got.sol == got.answer:
+                ans = 'Молодец!'
+                i += 1
+                if i > (len(Solution.objects.all()) - 1):
+                    i = 0
+                    return redirect('process')
+                task_ = Solution.objects.all()[i].task
+            else:
+                ans = 'Да ты двоечник!'
     else:
         form = PostForm()
         ans = ''
     return render(request, 'alg/process.html', {'form':form, 'task_':task_, 'ans':ans})
 	
+def addd(request):
+    if request.POST:
+        form = AddForm(request.POST)
+        if form.is_valid():
+            form.save()
+    form = AddForm()
+    return render(request, 'alg/addd.html', {'form':form})
+
