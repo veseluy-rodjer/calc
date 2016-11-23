@@ -25,7 +25,7 @@ SECRET_KEY = 'eo#=jzaop@d4&egpg9)0i08)1u%r3u=hy0g@zy)*9e_8wfuz($'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['calculator.pythonanywhere.com']
+ALLOWED_HOSTS = ['computing.pythonanywhere.com']
 
 
 # Application definition
