@@ -21,7 +21,7 @@ def process(request):
                 i += 1
                 if i > (len(Solution.objects.all()) - 1):
                     i = 0
-                    return redirect('process')
+                    return redirect('begin')
                 task_ = Solution.objects.all()[i].task
             else:
                 ans = 'Да ты двоечник!'
@@ -38,3 +38,5 @@ def addd(request):
     form = AddForm()
     return render(request, 'alg/addd.html', {'form':form})
 
+def begin(request):
+    return render(request, 'alg/begin.html', {})

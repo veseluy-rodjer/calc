@@ -8,7 +8,7 @@ class PostForm(forms.ModelForm):
         fields = ('sol',)
 
 class AddForm(forms.ModelForm):
-
-	class Meta:
-		model = Solution
-		fields = ('task',)
+	
+    class Meta:
+        model = Solution
+        fields = ('task',)
