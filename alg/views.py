@@ -17,6 +17,7 @@ def process(request):
             got.task = task_
             got.resh()
             if got.sol == got.answer:
+            	form = PostForm()
                 ans = 'Молодец!'
                 i += 1
                 if i > (len(Solution.objects.all()) - 1):
