@@ -17,7 +17,7 @@ body {
         text-decoration: none;
 }
 
-.page-header h6, .page-header h6 a, .page-header h6 a:visited, .page-header h6 a:active {
+.page-header h4, .page-header h4 a, .page-header h4 a:visited, .page-header h4 a:active {
         color: #ffffff;
         font-size: 36pt;
         text-decoration: none;
