@@ -2,10 +2,12 @@
 from django.shortcuts import render, redirect
 from .models import Solution
 from .forms import PostForm, AddForm
+import time
 
 # Create your views here.
 
 i = 0
+a = time.time()
 
 def process(request):
     global i
@@ -41,3 +43,10 @@ def addd(request):
 
 def begin(request):
     return render(request, 'alg/begin.html', {})
+
+def end(request):
+    return render(request, 'alg/end.html', {})
+
+b = time.time()
+if b - a == 12:
+    redirect('end')
