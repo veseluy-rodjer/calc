@@ -29,19 +29,19 @@ def process(request):
                     return redirect('begin')
                 task_ = Solution.objects.all()[i].task
             else:
+                form = PostForm()
                 ans = 'Да ты двоечник!'
     else:
         form = PostForm()
         ans = ''
     b = time.time()
-    d = int(b - a)
     c = 120 - int(time.time() - a)
     x = '00'
     s = 'Осталось'
     if c > 59:
         x = '01'
         c = c - 60
-    if d > 120:
+    if c < 1:
         a = time.time()
         i = 0
         return redirect('end')
@@ -60,4 +60,10 @@ def begin(request):
 
 def end(request):
     return render(request, 'alg/end.html', {})
+
+def start_alg(request):
+    return render(request, 'alg/start_alg.html', {})
+
+def head(request):
+    return render(request, 'alg/head.html', {})
 
