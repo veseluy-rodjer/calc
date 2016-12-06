@@ -11,6 +11,7 @@ a = time.time()
 
 def process(request):
     global i
+    global a
     task_ = Solution.objects.all()[i].task
     if request.POST:
         form = PostForm(request.POST)
@@ -31,7 +32,19 @@ def process(request):
     else:
         form = PostForm()
         ans = ''
-    return render(request, 'alg/process.html', {'form':form, 'task_':task_, 'ans':ans})
+    b = time.time()
+    d = int(b - a)
+    c = 120 - int(time.time() - a)
+    x = '00'
+    s = 'Осталось'
+    if c > 59:
+        x = '01'
+        c = c - 60
+    if d > 120:
+        a = time.time()
+        i = 0
+        return redirect('end')
+    return render(request, 'alg/process.html', {'form':form, 'task_':task_, 'ans':ans, 'c':c, 'x':x, 's':s})
 	
 def addd(request):
     if request.POST:
@@ -47,6 +60,3 @@ def begin(request):
 def end(request):
     return render(request, 'alg/end.html', {})
 
-b = time.time()
-if b - a == 12:
-    redirect('end')
