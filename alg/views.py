@@ -25,6 +25,7 @@ def process(request):
                 i += 1
                 if i > (len(Solution.objects.all()) - 1):
                     i = 0
+                    a = time.time()
                     return redirect('begin')
                 task_ = Solution.objects.all()[i].task
             else:
