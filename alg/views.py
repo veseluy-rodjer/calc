@@ -34,7 +34,6 @@ def process(request):
     else:
         form = PostForm()
         ans = ''
-    b = time.time()
     c = 120 - int(time.time() - a)
     x = '00'
     s = 'Осталось'
@@ -47,6 +46,13 @@ def process(request):
         return redirect('end')
     return render(request, 'alg/process.html', {'form':form, 'task_':task_, 'ans':ans, 'c':c, 'x':x, 's':s})
 	
+def process1(request):
+    global i
+    global a
+    i = 0
+    a = time.time()
+    return redirect('process')
+
 def addd(request):
     if request.POST:
         form = AddForm(request.POST)
