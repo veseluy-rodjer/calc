@@ -1,7 +1,7 @@
 {% extends 'alg/base.html' %}
 
 {% block content %}
-    <p align="center"><span id="my_timer" style="color: #0000FF; font-size: 150%; font-weight: bold;">{{s}}:{{x}}:{{c}}</span></p>
+    <p align="center" style="color: #0000FF; font-size: 150%; font-weight: bold;">Осталось:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="my_timer">{{s}}<font color="#ffffff">:</font>{{x}}:{{c}}</span></p>
     <h1>{{task_}}</h1>
     <h1>Введи свой ответ</h1>
     <form method="POST" class="post-form">{% csrf_token %}
