@@ -36,7 +36,7 @@ def process(request):
         ans = ''
     c = 120 - int(time.time() - a)
     x = '00'
-    s = ''
+    s = 'Осталось времени'
     if c > 59:
         x = '01'
         c = c - 60
