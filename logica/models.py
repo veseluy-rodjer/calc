@@ -15,7 +15,7 @@ class Logmodel(models.Model):
     d = [(a, a_a), (b, b_b), (c, c_c), (x, x_x)]
     log_task = models.TextField(max_length=400)
     log_sol = models.CharField(default=None, max_length=100, choices=d)
-    log_answer = models.CharField(max_length=100, blank=True)
+    log_answer = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
 		return str(self.pk)
