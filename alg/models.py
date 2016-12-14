@@ -5,7 +5,7 @@ from .arif import postfixEval, Stack, infixToPostfix
 # Create your models here.
 class Solution(models.Model):
 	task = models.CharField(max_length=100)
-	sol = models.IntegerField(blank=True, null=True)
+	sol = models.IntegerField(null=True)
 	answer = models.IntegerField(editable=False, blank=True, null=True)
 		
 	def __str__(self):

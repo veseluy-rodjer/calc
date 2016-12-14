@@ -1,0 +1,14 @@
+{% extends 'alg/base.html' %}
+
+{% block content %}
+    <p align="center"><span id="my_timer" style="color: #0000FF; font-size: 150%; font-weight: bold">{{s}}:{{x}}{{y}}:{{c}}</span></p>
+    <p style="face: Arial">{{task_.log_task}}</p>
+    <h4>Введи свой ответ</h4>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{form}}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+    {{q}}
+    <h4>{{ans}}</h4>
+{% endblock %}
+

@@ -2,39 +2,35 @@
 from django.shortcuts import render, redirect
 from .models import Logmodel
 import time
-
+from .forms import AddForm, LogForm
 
 # Create your views here.
 
 i = 0
 a = time.time()
 
-def process(request):
+def logica_process(request):
     global i
     global a
-    task_ = Solution.objects.all()[i].task
-    if request.POST:
-        form = PostForm(request.POST)
+    
+    task_ = Logmodel.objects.all()[i]
+    if request.method == "POST":
+        i += 1
+        task_ = Logmodel.objects.all()[i]      
+        form = LogForm(request.POST)
         if form.is_valid():
-            got = form.save(commit=False)
-            got.task = task_
-            got.resh()
-            if got.sol == got.answer:
-                form = PostForm()
-                ans = 'Молодец!'
-                i += 1
-                if i > (len(Solution.objects.all()) - 1):
-                    i = 0
-                    a = time.time()
-                    return redirect('begin')
-                task_ = Solution.objects.all()[i].task
-            else:
-                form = PostForm()
-                ans = 'Да ты двоечник!'
+            ans = 'Ну-ну...'
+            if i > 5:
+                ans = 'Быстрее думай!'
+            if i > 10:
+                ans = 'Еще быстрее!!'
+            if i > 15:
+                ans = 'Да ты крут!!!'
+            
     else:
-        form = PostForm()
         ans = ''
-    c = 60 - int(time.time() - a)
+    form = LogForm()
+    c = 300 - int(time.time() - a)
     x = 0
     y = 0
     s = 'Осталось времени'
@@ -47,8 +43,8 @@ def process(request):
     if c < 1 and x == 0 and y == 0:
         a = time.time()
         i = 0
-        return redirect('end')
-    return render(request, 'alg/process.html', {'form':form, 'task_':task_, 'ans':ans, 'c':c, 'x':x, 's':s, 'y':y})
+        return redirect('logica_end')
+    return render(request, 'logica/process.html', {'form':form, 'task_':task_, 'ans':ans, 'c':c, 'x':x, 's':s, 'y':y})
 
 def start_logica(request):
     return render(request, 'logica/start_logica.html', {})
@@ -65,3 +61,11 @@ def logica_begin(request):
 
 def logica_end(request):
     return render(request, 'logica/end.html', {})
+
+def logica_add(request):
+    if request.method == "POST":
+        form = AddForm(request.POST)
+        if form.is_valid():
+            form.save()
+    form = AddForm()
+    return render(request, 'logica/add.html', {'form':form})

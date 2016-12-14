@@ -13,7 +13,7 @@ def process(request):
     global i
     global a
     task_ = Solution.objects.all()[i].task
-    if request.POST:
+    if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
             got = form.save(commit=False)
@@ -58,7 +58,7 @@ def process1(request):
     return redirect('process')
 
 def addd(request):
-    if request.POST:
+    if request.method == "POST":
         form = AddForm(request.POST)
         if form.is_valid():
             form.save()
