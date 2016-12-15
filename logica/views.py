@@ -8,14 +8,20 @@ from .forms import AddForm, LogForm
 
 i = 0
 a = time.time()
+counter = 0
 
 def logica_process(request):
     global i
     global a
-    
+    global counter
     task_ = Logmodel.objects.all()[i]
     if request.method == "POST":
         i += 1
+        if i > len(Logmodel.objects.all()) - 1:
+            i -= 1
+            task_ = Logmodel.objects.all()[i]
+            z = i
+            return redirect('logica_begin')
         task_ = Logmodel.objects.all()[i]      
         form = LogForm(request.POST)
         if form.is_valid():
@@ -26,6 +32,15 @@ def logica_process(request):
                 ans = 'Еще быстрее!!'
             if i > 15:
                 ans = 'Да ты крут!!!'
+            sav = form.save(commit=False)
+            if sav.log_answer == sav.get_log_sol_display():
+                counter += 1
+        if i > (len(Logmodel.objects.all()) - 1):
+            i -= 1
+            task_ = Logmodel.objects.all()[i]
+            z = i
+            return render(request, 'logica/process.html', {'form':form, 'task_':task_, 'ans':ans, 'c':c, 'x':x, 's':s, 'y':y, 'z':z})
+            
             
     else:
         ans = ''
@@ -52,8 +67,10 @@ def start_logica(request):
 def logica_process1(request):
     global i
     global a
+    global counter
     i = 0
     a = time.time()
+    counter = 0
     return redirect('logica_process')
 
 def logica_begin(request):
