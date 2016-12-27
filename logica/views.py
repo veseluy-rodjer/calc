@@ -18,10 +18,7 @@ def logica_process(request):
     if request.method == "POST":
         i += 1
         if i > len(Logmodel.objects.all()) - 1:
-            i -= 1
-            task_ = Logmodel.objects.all()[i]
-            z = i
-            return redirect('logica_begin')
+            return redirect('logica_result')
         task_ = Logmodel.objects.all()[i]      
         form = LogForm(request.POST)
         if form.is_valid():
@@ -33,15 +30,8 @@ def logica_process(request):
             if i > 15:
                 ans = 'Да ты крут!!!'
             sav = form.save(commit=False)
-            if sav.log_answer == sav.get_log_sol_display():
+            if Logmodel.objects.all()[i - 1].log_answer == sav.get_log_sol_display():
                 counter += 1
-        if i > (len(Logmodel.objects.all()) - 1):
-            i -= 1
-            task_ = Logmodel.objects.all()[i]
-            z = i
-            return render(request, 'logica/process.html', {'form':form, 'task_':task_, 'ans':ans, 'c':c, 'x':x, 's':s, 'y':y, 'z':z})
-            
-            
     else:
         ans = ''
     form = LogForm()
@@ -73,9 +63,6 @@ def logica_process1(request):
     counter = 0
     return redirect('logica_process')
 
-def logica_begin(request):
-    return render(request, 'logica/begin.html', {})
-
 def logica_end(request):
     return render(request, 'logica/end.html', {})
 
@@ -86,3 +73,17 @@ def logica_add(request):
             form.save()
     form = AddForm()
     return render(request, 'logica/add.html', {'form':form})
+
+def logica_result(request):
+    global counter
+    if counter <= 5:
+        appraisal = 'Очевидно, ты очень умный, но ответы нажимал наугад.'
+    elif 5 < counter <=10:
+        appraisal = 'Не очень хорошо, надо тренировать свой мозг'
+    elif 10 < counter <= 15:
+        appraisal = 'Хорошо, но ты можешь лучше'
+    elif 15 < counter <= 17:
+        appraisal = 'Очень хороший результат! Ты почти великолепен!'
+    else:
+        appraisal = 'Отличный результат! Ты лучший!'
+    return render(request, 'logica/result.html', {'counter':counter, 'appraisal':appraisal})

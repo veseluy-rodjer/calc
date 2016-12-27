@@ -1,0 +1,7 @@
+{% extends 'logica/base.html' %}
+
+{% block content %}
+    <h3>Твой результат:<br>{{counter}} правильных ответов из 18-ти.<br><br>{{appraisal}}</h3>
+    <h1><a href="{% url 'logica_process1' %}">Начать сначала</a></h1>
+{% endblock %}
+

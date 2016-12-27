@@ -1,0 +1,62 @@
+{% load staticfiles %}
+<html>
+        <head>
+            <title>Arifmetika</title>
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+            <link rel="stylesheet" href="{% static 'css/alg.css' %}">
+            <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css">
+        </head>
+
+        <head>
+            <script type="text/javascript">
+              function startTimer() {
+                var my_timer = document.getElementById("my_timer");
+                var time = my_timer.innerHTML;
+                var arr = time.split(":");
+                var h = arr[0];
+                var m = arr[1];
+                var s = arr[2];
+                if (s == 0) {
+                  if (m == 0) {
+                    window.location.reload();
+                    return;
+                    h--;
+                    m = 60;
+                    if (h < 10) h = "0" + h;
+                  }
+                  m--;
+                  if (m < 10) m = "0" + m;
+                  s = 59;
+                }
+                else s--;
+                if (s < 10) s = "0" + s;
+                document.getElementById("my_timer").innerHTML = h+":"+m+":"+s;
+                setTimeout(startTimer, 1000);
+              }
+            </script>
+
+        </head>
+
+        <body onload="startTimer()">
+            <div class="page-header">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logica_add' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+                {% endif %}
+                <h1>Привет! Предлагаю порешать арифметические задачки.</h1>
+                <p align="center" style="color: #ffffff"><big>"Разум это не сосуд, который нужно заполнить,<br>а пламя, которое необходимо разжечь" (Плутарх)</big></p>
+                <h4><a href='/'>На главую страницу</a></h4>
+                <h4 align="right"><a href='/admin/'>Админка</a></h4>
+            </div>
+            
+            <div class="content container">
+                <div class="row">
+                    <div class="col-md-8">
+                        {% block content %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+                        
+        </body>
+</html>
