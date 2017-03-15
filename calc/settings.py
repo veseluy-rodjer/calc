@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'alg',
     'logica',
+    'erudition',
 ]
 
 MIDDLEWARE = [

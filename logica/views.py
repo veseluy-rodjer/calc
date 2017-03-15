@@ -22,13 +22,7 @@ def logica_process(request):
         task_ = Logmodel.objects.all()[i]      
         form = LogForm(request.POST)
         if form.is_valid():
-            ans = 'Ну-ну...'
-            if i > 5:
-                ans = 'Быстрее думай!'
-            if i > 10:
-                ans = 'Еще быстрее!!'
-            if i > 15:
-                ans = 'Да ты крут!!!'
+            ans = 'Осталось', len(Logmodel.objects.all()) - i, 'задач'
             sav = form.save(commit=False)
             if Logmodel.objects.all()[i - 1].log_answer == sav.get_log_sol_display():
                 counter += 1

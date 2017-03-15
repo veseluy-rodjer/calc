@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('alg.urls')),
     url(r'^logica/', include('logica.urls')),
+    url(r'^erudition/', include('erudition.urls')),
 ]
