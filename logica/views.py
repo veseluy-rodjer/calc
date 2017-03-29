@@ -16,16 +16,16 @@ def logica_process(request):
     global counter
     task_ = Logmodel.objects.all()[i]
     if request.method == "POST":
+        form = LogForm(request.POST)
+        if form.is_valid():
+            ans = 'Осталось ' + str(len(Logmodel.objects.all()) - i - 1) + ' задач'
+            sav = form.save(commit=False)
+            if Logmodel.objects.all()[i].log_answer == sav.get_log_sol_display():
+                counter += 1
         i += 1
         if i > len(Logmodel.objects.all()) - 1:
             return redirect('logica_result')
         task_ = Logmodel.objects.all()[i]      
-        form = LogForm(request.POST)
-        if form.is_valid():
-            ans = 'Осталось ' + str(len(Logmodel.objects.all()) - i) + ' задач'
-            sav = form.save(commit=False)
-            if Logmodel.objects.all()[i - 1].log_answer == sav.get_log_sol_display():
-                counter += 1
     else:
         ans = ''
     form = LogForm()
@@ -40,8 +40,6 @@ def logica_process(request):
         x = y // 10
         y = y % 10
     if c < 1 and x == 0 and y == 0:
-        a = time.time()
-        i = 0
         return redirect('logica_end')
     return render(request, 'logica/process.html', {'form':form, 'task_':task_, 'ans':ans, 'c':c, 'x':x, 's':s, 'y':y})
 

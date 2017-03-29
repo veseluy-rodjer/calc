@@ -1,0 +1,15 @@
+{% extends 'erudition/base.html' %}
+
+{% block content %}
+    <h3>Ответы:</h3>
+
+    {% for zet in slip %}
+        <p><b>Вопрос:</b> {{ zet.erud_task }}</p>
+        <p><b>Твой ответ:</b> {{ zet.erud_sol }}</p>
+        <p><b>Правильный ответ:</b> {{ zet.erud_answer }}</p>
+    {% endfor %}
+    
+    <h3>Твой результат:<br>{{counter}} правильных ответов из 17-ти.<br><br>{{appraisal}}</h3>
+    <h1><a href="{% url 'erudition_process1' %}">Начать сначала</a></h1>
+{% endblock %}
+
