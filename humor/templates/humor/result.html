@@ -1,0 +1,8 @@
+{% extends 'humor/base.html' %}
+
+{% block content %}
+    <h3>Твой результат:</h3>
+    <h4>{{appraisal}}</h4>
+    <h1><a href="{% url 'start_process' %}">Начать сначала</a></h1>
+{% endblock %}
+

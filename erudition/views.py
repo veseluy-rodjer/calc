@@ -76,7 +76,7 @@ def erudition_result(request):
     elif 5 < counter <=10:
         appraisal = 'Не очень хорошо, надо тренировать свой мозг'
     elif 10 < counter <= 15:
-        appraisal = 'Хорошо, но ты можешь лучше'
+        appraisal = 'Хорошо, но ты можешь лучше.'
     elif 15 < counter <= 16:
         appraisal = 'Очень хороший результат! Ты почти великолепен!'
     else:

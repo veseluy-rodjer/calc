@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'alg',
     'logica',
     'erudition',
+    'humor',
 ]
 
 MIDDLEWARE = [

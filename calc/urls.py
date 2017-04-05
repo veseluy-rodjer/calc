@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'', include('alg.urls')),
     url(r'^logica/', include('logica.urls')),
     url(r'^erudition/', include('erudition.urls')),
+    url(r'^humor/', include('humor.urls')),
 ]

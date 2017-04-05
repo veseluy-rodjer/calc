@@ -1,0 +1,8 @@
+{% extends 'humor/base.html' %}
+
+{% block content %}
+    <p style="face: Arial">{{task_.humor_task}}</p>
+    <h4 align="center"><a href="{% url 'humor_process' v=3 %}">Вариант a</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url 'humor_process' v=2 %}">Вариант b</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url 'humor_process' v=1 %}">Вариант c</a></h4>
+    <h4>{{ans}}</h4>
+{% endblock %}
+
